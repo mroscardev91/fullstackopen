@@ -1,6 +1,26 @@
 import { useState } from 'react'
 
+const Stadistics = ({ good, neutral, bad }) => {
+  const total = () => {
+    return good + neutral + bad
+  }
 
+  const average = () => {
+    return (good - bad) / total()
+  }
+
+  const positivePercentage = () => {
+    return (good / total()) * 100
+  }
+
+  return (
+    <>
+      <p>all {total()}</p>
+      <p>average {average()}</p>
+      <p>positive {positivePercentage()} %</p>
+    </>
+  )
+}
 
 
 const App = () => {
@@ -14,17 +34,6 @@ const App = () => {
   const increaseByOneNeutral = () => setNeutral(neutral + 1)
   const increaseByOneBad = () => setBad(bad + 1)
 
-  const total = () => {
-    return good + neutral + bad
-  }
-
-  const average = () => {
-    return (good - bad) / total()
-  }
-
-  const positivePercentage = () => {
-    return (good / total()) * 100
-  }
 
 
   return (
@@ -37,9 +46,7 @@ const App = () => {
       <p>good {good}</p>
       <p>neutral {neutral}</p>
       <p>bad {bad}</p>
-      <p>all {total()}</p>
-      <p>average {average()}</p>
-      <p>positive {positivePercentage()} %</p>
+      <Stadistics good={good} neutral={neutral} bad={bad} />
     </div>
   )
 }
